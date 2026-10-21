@@ -60,3 +60,38 @@ document.querySelectorAll(".chip").forEach(function(chip) {
     document.getElementById("comecar").scrollIntoView();
   };
 });
+
+// Entradas no scroll: comunicam a sequência da página sem bloquear o conteúdo.
+(function initScrollReveals() {
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var items = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+
+  document.querySelectorAll("[data-reveal-group]").forEach(function(group) {
+    Array.prototype.forEach.call(group.children, function(child, index) {
+      child.style.setProperty("--reveal-delay", (index * 90) + "ms");
+      items.push(child);
+    });
+  });
+
+  items.forEach(function(item) {
+    item.classList.add("reveal-item");
+    if (item.dataset.delay) item.style.setProperty("--reveal-delay", item.dataset.delay + "ms");
+  });
+
+  document.documentElement.classList.add("js");
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    items.forEach(function(item) { item.classList.add("is-visible"); });
+    return;
+  }
+
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -8%"});
+
+  items.forEach(function(item) { observer.observe(item); });
+})();

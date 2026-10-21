@@ -7,6 +7,7 @@
   <meta name="description" content="Pare de perder clientes no papel. Use um cartão NFC para abrir WhatsApp, PIX, avaliações, cardápio e site com um toque.">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 8 56 52H8Z' fill='%23000'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -28,7 +29,9 @@
       </div>
     </div>
     <figure class="hero-media" data-reveal data-delay="120">
-      <img src="assets/rafc-hero-product-optimized.png" width="1024" height="683" alt="Cartão NFC RAFC preto próximo de um smartphone" fetchpriority="high">
+      <div class="hero-orbit">
+        <img src="assets/rafc-hero-product-optimized.png" width="1024" height="683" alt="Cartão NFC RAFC preto próximo de um smartphone" fetchpriority="high">
+      </div>
     </figure>
   </div></header>
 
@@ -46,9 +49,12 @@
     </div>
   </div></section>
 
-  <section id="como-funciona"><div class="wrap" data-reveal>
-    <h2>Encostou. Abriu. Resolveu.</h2>
-    <p class="lead">Sem app, sem cadastro e sem dar tempo para o cliente desistir.</p>
+  <section id="como-funciona"><div class="wrap process-layout">
+    <div class="process-intro" data-reveal>
+      <span class="eyebrow mono">COMO FUNCIONA</span>
+      <h2>Encostou.<br> Abriu. Resolveu.</h2>
+      <p class="lead">Sem app, sem cadastro e sem dar tempo para o cliente desistir.</p>
+    </div>
     <div class="flow" data-reveal-group>
       <article><span class="flow-mark mono">01</span><div><h3>Aproxime</h3><p>Encoste o cartão no celular ou mostre o QR Code.</p></div></article>
       <article><span class="flow-mark mono">02</span><div><h3>Escolha</h3><p>O cliente encontra WhatsApp, PIX, cardápio e redes.</p></div></article>

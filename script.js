@@ -61,6 +61,32 @@ document.querySelectorAll(".chip").forEach(function(chip) {
   };
 });
 
+// Inclinação sutil do produto: responde ao cursor sem afetar a animação de entrada.
+(function initHeroTilt() {
+  var hero = document.querySelector(".hero-media");
+  var orbit = document.querySelector(".hero-orbit");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!hero || !orbit || reduceMotion || !precisePointer) return;
+
+  var frame = 0;
+  hero.addEventListener("pointermove", function(event) {
+    var bounds = hero.getBoundingClientRect();
+    var x = (event.clientX - bounds.left) / bounds.width - .5;
+    var y = (event.clientY - bounds.top) / bounds.height - .5;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(function() {
+      orbit.style.setProperty("--hero-rx", (-y * 7).toFixed(2) + "deg");
+      orbit.style.setProperty("--hero-ry", (x * 9).toFixed(2) + "deg");
+    });
+  });
+  hero.addEventListener("pointerleave", function() {
+    cancelAnimationFrame(frame);
+    orbit.style.setProperty("--hero-rx", "0deg");
+    orbit.style.setProperty("--hero-ry", "0deg");
+  });
+})();
+
 // Entradas no scroll: comunicam a sequência da página sem bloquear o conteúdo.
 (function initScrollReveals() {
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

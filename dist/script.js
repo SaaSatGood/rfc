@@ -18,11 +18,18 @@ function show(passo) {
   for (var i = 1; i <= 4; i++) {
     document.getElementById("q" + i).classList.toggle("hide", i !== passo);
   }
-  document.getElementById("bar").style.width = (passo * 25) + "%";
+  var progresso = Math.min(passo, 3);
+  document.getElementById("bar").style.width = (progresso * 33.333) + "%";
+  document.querySelector(".bar").setAttribute("aria-valuenow", progresso);
+  document.getElementById("quizStatus").textContent = passo === 4 ? "Orçamento pronto" : "Pergunta " + passo + " de 3";
+  if (passo > 1) {
+    var titulo = document.querySelector("#q" + passo + " h3");
+    if (titulo) titulo.focus({preventScroll:true});
+  }
 }
 
 function msg() {
-  return "Olá! Meu negócio: " + D.seg + ". Quero resolver: " + D.obj + ". Preciso de: " + D.qtd + " do cartão NFC RAFC. Pode me enviar um orçamento?";
+  return "Olá! Meu negócio: " + D.seg + ". Quero resolver: " + D.obj + ". Preciso de " + D.qtd + " NFC RAFC. Pode me enviar um orçamento?";
 }
 
 function finish() {
